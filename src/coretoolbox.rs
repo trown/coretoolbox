@@ -283,7 +283,8 @@ fn create(opts: &CreateOpts) -> Fallible<()> {
         "create",
         "--interactive",
         "--tty",
-        "--hostname=toolbox",
+        "--hostname",
+        &name,
         "--network=host",
         // We are not aiming for security isolation here; besides these, the
         // user's home directory is mounted in, so anything that wants to "escape"
@@ -447,6 +448,8 @@ mod entrypoint {
             &state.home,
             "--uid",
             &uidstr,
+            "--shell",
+            "/usr/bin/fish",
         ]);
         if with_sudo {
             cmd.args(&["--groups", "wheel"]);
