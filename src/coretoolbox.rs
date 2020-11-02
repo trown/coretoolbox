@@ -660,13 +660,8 @@ mod entrypoint {
             Command::new("/bin/bash")
         } else {
             let mut cmd = Command::new("setpriv");
-            cmd.args(&[
-                "--inh-caps=-all",
-                "su",
-                "--preserve-environment",
-                state.username.as_str(),
-            ])
-            .env("HOME", state.home.as_str());
+            cmd.args(&["su", "--preserve-environment", state.username.as_str()])
+                .env("HOME", state.home.as_str());
             cmd
         };
 
